@@ -23,11 +23,20 @@ $(document).ready(function() {
     // make a dancer with a random position
 
     var dancer = new dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
+      $('body').height() * Math.random(),
+      $('body').width() * Math.random(),
       Math.random() * 1000
     );
     $('body').append(dancer.$node);
   });
+
+  $('.actionButton').click(function() {
+    $('.dancer').css('top', '50%');
+    console.log('click');
+  });
+
+  // $('img.blinkyDancer').on('click', function() {
+  //   console.log('click');
+  // });
 });
 
