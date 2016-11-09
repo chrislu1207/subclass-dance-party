@@ -1,5 +1,8 @@
 $(document).ready(function() {
   window.dancers = [];
+  window.linedUp = false;
+  window.battleMode = false;
+  $('.battle').hide();
 
   $('.addDancerButton').on('click', function(event) {
     /* This function sets up the click handlers for the create-dancer
@@ -25,18 +28,107 @@ $(document).ready(function() {
     var dancer = new dancerMakerFunction(
       $('body').height() * Math.random(),
       $('body').width() * Math.random(),
-      Math.random() * 1000
+      25
     );
     $('body').append(dancer.$node);
+    window.dancers.push(dancer);
+    dancer.animateDiv();
+    if (window.dancers.length >= 2) {
+      $('.battle').show();
+    }
   });
 
-  $('.actionButton').click(function() {
-    $('.dancer').css('top', '50%');
-    console.log('click');
+  $('.lineup').click(function() {
+    $('.addDancerButton').toggle();
+    if (!window.linedUp) {
+      $('img.dancer').stop();
+      $('img.dancer').animate({ top: $(window).height() * 0.75 }, 500);
+      window.linedUp = true;
+    } else {
+      for (var i = 0; i < window.dancers.length; i++) {
+        window.dancers[i].animateDiv();
+      }
+      window.linedUp = false;
+    }
   });
 
-  // $('img.blinkyDancer').on('click', function() {
-  //   console.log('click');
-  // });
+  $('.goHome').click(function() {
+    $('img.dancer').remove();
+    window.dancers = [];
+  });
+
+  $('.battle').click(function () {
+    window.battleMode = true;
+    $('img.dancer').stop();
+    $('img.dancer').animate({ top: $(window).height() * 0.75 }, 500);
+
+    window.dancers[0].$node.animate({ top: $(window).height() * 0.4, left: $(window).width() * .33}, 500);
+    if (window.dancers[0].$node[0].className === 'dancer jumpyDancer') {
+      if (window.dancers[0].evolved) {
+        window.dancers[0].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/gyarados-21.gif');
+      } else {
+        window.dancers[0].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/magikarp-21.gif');
+      }
+    } else if (window.dancers[0].$node[0].className === 'dancer blinkyDancer') {
+      if (window.dancers[0].evolved) {
+        window.dancers[0].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/gengar-31.gif');
+      } else {
+        window.dancers[0].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/haunter-21.gif');
+      }
+    } else if (window.dancers[0].$node[0].className === 'dancer pikaDancer') {
+      if (window.dancers[0].evolved) {
+        window.dancers[0].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/raichu-21.gif');
+      } else {
+        window.dancers[0].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/pikachu-21.gif');
+      }
+    }
+    window.dancers[0].$node.css('transform', 'scaleX(-2) scaleY(2)');
+    window.dancers[1].$node.animate({ top: $(window).height() * 0.4, left: $(window).width() * .66}, 500);
+    if (window.dancers[1].$node[0].className === 'dancer jumpyDancer') {
+      if (window.dancers[1].evolved) {
+        window.dancers[1].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/gyarados-21.gif');
+      } else {
+        window.dancers[1].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/magikarp-21.gif');
+      }
+    } else if (window.dancers[1].$node[0].className === 'dancer blinkyDancer') {
+      if (window.dancers[1].evolved) {
+        window.dancers[1].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/gengar-31.gif');
+      } else {
+        window.dancers[1].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/haunter-21.gif');
+      }
+    } else if (window.dancers[1].$node[0].className === 'dancer pikaDancer') {
+      if (window.dancers[1].evolved) {
+        window.dancers[1].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/raichu-21.gif');
+      } else {
+        window.dancers[1].$node.attr('src', 'http://pokeunlock.com/wp-content/uploads/2015/01/pikachu-21.gif');
+      }
+    }
+
+  });
+
+  $(document).on('keypress', function (e) {
+    var attackR = function() {
+      window.dancers[0].$node.animate({left: $(window).width() * .66}, 500, function() {
+        window.dancers[0].$node.animate({left: $(window).width() * .33}, 500);
+      });
+    };
+    var attackL = function() {
+      window.dancers[1].$node.animate({left: $(window).width() * .33}, 500, function() {
+        window.dancers[1].$node.animate({left: $(window).width() * .66}, 500);
+      });
+    };
+
+    if (window.battleMode) {
+      if (e.keyCode === 97) {
+        attackR();
+      }
+      if (e.keyCode === 108) {
+        attackL();
+      }
+    }
+  });
+
+
+
 });
 

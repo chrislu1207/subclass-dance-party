@@ -1,21 +1,39 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Object Dance Party</title>
+    <style type='text/css'>
+      @font-face {
+        font-family: 'Pokemon';
+        src: url(pokemonHollow.ttf) format('truetype');
+      }
+      a {
+        font-family: 'Pokemon', Verdana, Tahoma;
+      }
+      .title {
+        font-family: 'Pokemon', Verdana, Tahoma;
+      }
+    </style>
+    <title>Pokemon Dance Party</title>
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" href="jquery-ui.min.css">
     <script src="lib/jquery.js"></script>
+    <script src='jquery-ui.min.js'></script>
     <script src="src/dancer.js"></script>
     <script src="src/blinkyDancer.js"></script>
     <script src="src/jumpyDancer.js"></script>
     <script src="src/wigglyDancer.js"></script>
+    <script src="src/pikaDancer.js"></script>
   </head>
   <body>
     <div class="topbar">
-      <span class="title">object dance party</span>
-      <a href="#" class="addDancerButton" data-dancer-maker-function-name="makeBlinkyDancer">add a blinky dancer</a>
-      <a href="#" class="addDancerButton" data-dancer-maker-function-name="makeJumpyDancer">add a jumpy dancer</a>
-      <a href="#" class="addDancerButton" data-dancer-maker-function-name="makeWigglyDancer">add a wiggly dancer</a>
-      <a href="#" class="actionButton">Line Up!</a>    </div>
+      <span class="title">Pokemon Dance Party!</span>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="makeBlinkyDancer">Add Haunter</a>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="makeJumpyDancer">Add Magikarp</a>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="makeWigglyDancer">Add Snorlax</a>
+      <a href="#" class="addDancerButton" data-dancer-maker-function-name="makePikaDancer">Add Pikachu</a>
+      <a href="#" class="actionButton lineup">Line Up!</a>
+      <a href="#" class="actionButton goHome">Go Home!</a>
+      <a href="#" class="actionButton battle">Battle!</a>    </div>
     <script src="src/init.js"></script>
   </body>
 </html>
